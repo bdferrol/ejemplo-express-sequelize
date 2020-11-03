@@ -44,9 +44,14 @@ app.use(function(err, req, res, next) {
 
 
 
-const connection = new Sequelize("mariadb://root:maria123@localhost:3306/tuitel");
+const connection = new Sequelize("mariadb://root:maria123@127.0.0.1:3306/tuitel");
 connection.authenticate().then(() => {
   Mensaje.init(connection);
+  Mensaje.sync();
+})
+.catch(err => {
+  console.log(err);
+  
 });
 
 module.exports = app;
