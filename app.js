@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const {Sequelize} = require('sequelize');
+const Mensaje = require('./models/mensaje');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -41,7 +43,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-const connection = new Sequelize("mariadb://root:maria123@localhost:3306/tuitel");
 
+const connection = new Sequelize("mariadb://root:maria123@localhost:3306/tuitel");
+connection.authenticate().then(() => {
+  Mensaje.init(connection);
+});
 
 module.exports = app;
