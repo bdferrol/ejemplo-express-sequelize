@@ -1,15 +1,16 @@
 const { Model, DataTypes } = require("sequelize");
-const { sequelize } = require("./autor");
-//const Autor = require("./autor");
+const { sequelize, belongsTo } = require("./autor");
+const Autor = require("./autor");
 
 class Mensaje extends Model {
 
     static init(connection) {
-        connection.define("Mensaje", {
+        super.init({
             fechaHora: DataTypes.DATE,
             texto: DataTypes.STRING
-        });        
-
+        }, {
+            sequelize: connection,
+        });
     }
 }
 

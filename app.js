@@ -44,16 +44,18 @@ app.use(function(err, req, res, next) {
 });
 
 
-
-const connection = new Sequelize("mariadb://rootu:maria123@127.0.0.1:3306/test");
+const connection = new Sequelize("mariadb://root@127.0.0.1:3306/test");
 connection.authenticate().then(() => {
 
+  //1. Inicialización de los modelos
   Mensaje.init(connection);
   Autor.init(connection);
 
+  //2. Declaración de las relaciones
   Autor.hasMany(Mensaje);
   Mensaje.belongsTo(Autor);
 
+  //3. Creación de tablas en las BD
   connection.sync();
 })
 .catch(err => {

@@ -4,9 +4,11 @@ const { Model, DataTypes } = require("sequelize");
 class Autor extends Model {
 
     static init(connection) {
-        connection.define("Autor", {
+        super.init({
             nombre: DataTypes.STRING
-        });        
+        }, {
+            sequelize: connection,
+        });       
     }
 }
 
