@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const {Sequelize} = require('sequelize');
 const Mensaje = require('./models/mensaje');
+const Autor = require("./models/autor");
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -44,10 +45,16 @@ app.use(function(err, req, res, next) {
 
 
 
-const connection = new Sequelize("mariadb://root:maria123@127.0.0.1:3306/tuitel");
+const connection = new Sequelize("mariadb://rootu:maria123@127.0.0.1:3306/test");
 connection.authenticate().then(() => {
+
   Mensaje.init(connection);
-  Mensaje.sync();
+  Autor.init(connection);
+
+  Autor.hasMany(Mensaje);
+  Mensaje.belongsTo(Autor);
+
+  connection.sync();
 })
 .catch(err => {
   console.log(err);
