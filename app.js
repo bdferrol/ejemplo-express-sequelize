@@ -44,6 +44,23 @@ app.use(function(err, req, res, next) {
 });
 
 
+/* Establecemos la conexión con la base de datos. Primeramente hay que definir el objeto
+connection, que contendrá los datos de acceso a la base de datos que queremos usar. Una vez
+definido, llamamos al método authenticate para iniciar la conexión.
+
+El método autenticate devuelve una promesa (Promise), lo que quiere decir que el establecimiento
+de la conexión con la base de datos ocurre de forma no bloqueante. El control es devuelto a nuestro
+programa de forma inmediata.
+
+Necesitamos realizar algunas operaciones con la base de datos una vez que se establezca la
+conexión. A esa promesa que nos devuelve authenticate le podemos indicar algunas instrucciones para
+que las ejecute una vez que la conexión se establezca: es por eso que añadimos la llamada then. Y si
+ocurriese algún error durante la conexión, incorporamos también una llamada a catch.
+
+Tanto then como catch reciben como único parámetro una función (utilizamos en ambos casos funciones
+anónimas en línea). Esas funciones contienen esas instrucciones que queremos lanzar en diferido,
+cuando la conexión se establezca o cuando falle.
+*/
 const connection = new Sequelize("mariadb://root@127.0.0.1:3306/test");
 connection.authenticate().then(() => {
 
