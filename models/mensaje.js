@@ -10,6 +10,7 @@ class Mensaje extends Model {
             texto: DataTypes.STRING
         }, {
             sequelize: connection,
+            modelName: "Mensaje",
         });
     }
 }

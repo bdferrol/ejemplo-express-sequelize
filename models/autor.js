@@ -8,6 +8,8 @@ class Autor extends Model {
             nombre: DataTypes.STRING
         }, {
             sequelize: connection,
+            modelName: "Autor",
+            tableName: "Autores"
         });       
     }
 }
