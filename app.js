@@ -26,6 +26,17 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+/**
+ * Hacemos uso de los middlewares cookieParser y cookieSession; que se encargan,
+ * respectivamente, de procesar las cookies y de gestionar la información de la
+ * sesión en éstas.
+ * 
+ * Es necesario darle un nombre a la cookie, así como un par de claves para que
+ * el middleware firme los datos y un periodo de validez máximo.
+ * 
+ * El periodo de validez se expresa en milisegundos. Si se omite, la duración de
+ * la cookie será hasta el cierre de la sesión (cerrar navegador/salir del sistema).
+ */
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'sesion', //nombre de la cookie
@@ -33,6 +44,13 @@ app.use(cookieSession({
   maxAge: 5 * 60 * 1000 //caducidad en milisegundos
 }))
 
+/**
+ * Este otro middleware (static) se utiliza para servir contenidos estáticos. Todos
+ * los archivos que estén dentro de la carpeta public estarán accesibles con una
+ * ruta igual a la ruta relativa dentro de la carpeta public.
+ * 
+ * Ejemplo:  http://localhost:3000/images/logo.png <-> public/images/logo.png
+ */
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
