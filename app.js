@@ -40,7 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'sesion', //nombre de la cookie
-  keys: ["aaaaaaaaaa", "bbbbbbbbb"],  //claves para firmar la cookie
+  keys: ["secret1", "secret2"],  //claves para firmar la cookie
   maxAge: 5 * 60 * 1000 //caducidad en milisegundos
 }))
 
