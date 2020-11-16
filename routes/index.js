@@ -4,6 +4,12 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
+  let usuario = req.session.usuario;
+
+  if (usuario) {
+    // ...
+  }
+
   let mensajes = await Mensaje.findAll();
   if (mensajes) {
     res.render('index', { title: 'Express', mensajes });

@@ -20,9 +20,14 @@ router.post('/nuevo', async function (req, res) {
 
     if (password == repassword) {
       let usuario = new Autor({nombre, email, password});
-      await usuario.save();
-      res.redirect("/usuarios");
+      try {
+        await usuario.save();
+        res.redirect("/usuarios");
+      } catch(err) {
+        res.render("registro-usuario", {error: err.message})        
+      }
     } else {
+      res.render("registro-usuario", {error: "Password no coincide"})
       //TODO: mostrar error
     }
 })
