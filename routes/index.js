@@ -1,3 +1,8 @@
+/**
+ * @module routes_index
+ */
+
+
 var express = require('express');
 const Mensaje = require('../models/mensaje');
 var router = express.Router();
@@ -18,7 +23,14 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-
+/**
+ * Publicar un nuevo mensaje.
+ * 
+ * @name POST /publicar
+ * @function
+ * @param {*} req Datos de la petición.
+ * @param {*} res Respuesta a la petición.
+ */
 router.post('/publicar', async function (req, res) {
   await Mensaje.create({...req.body, fechaHora: new Date()});
   res.redirect('/');

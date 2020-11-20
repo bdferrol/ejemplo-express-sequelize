@@ -1,6 +1,14 @@
+/**
+ * @module models/autor
+ */
+
 const { Model, DataTypes } = require("sequelize");
 //const Mensaje = require("./mensaje");
 
+/**
+ * Modelo de autor con los correspondientes campos.
+ * @class Autor
+ */
 class Autor extends Model {
 
     static init(connection) {
