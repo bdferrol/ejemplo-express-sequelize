@@ -5,12 +5,12 @@ var Autor = require('../models/autor');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/', async function(req, res, next) {
+router.get('/', async function(_, res) {
   let usuarios = await Autor.findAll();
   res.render("lista-usuarios", {usuarios});
 });
 
-router.get('/nuevo', function (req, res) {
+router.get('/nuevo', function (_, res) {
   res.render("registro-usuario");
 })
 
@@ -33,12 +33,12 @@ router.post('/nuevo', async function (req, res) {
 })
 
 
-router.get('/:id', function (req, res) {
+router.get('/:id', function (_, res) {
   res.render("detalle-usuario");  
 })
 
-router.post('/:id', function (req, res) {
-  
+router.post('/:id', function (_, res) {
+  res.render("detalle-usuario");    
 })
 
 

@@ -4,7 +4,7 @@ var Autor = require('../models/autor');
 
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
   res.render("login");
 });
 

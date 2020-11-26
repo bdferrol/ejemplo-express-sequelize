@@ -1,5 +1,5 @@
 /**
- * @module routes_index
+ * @module routes/index
  */
 
 
@@ -8,7 +8,7 @@ const Mensaje = require('../models/mensaje');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
+router.get('/', async function(req, res) {
   let usuario = req.session.usuario;
 
   if (usuario) {

@@ -20,7 +20,7 @@ const { necesitaAutenticacion, necesitaAdmin } = require('./auth');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(path.dirname(''), 'views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -52,7 +52,7 @@ app.use(cookieSession({
  * 
  * Ejemplo:  http://localhost:3000/images/logo.png <-> public/images/logo.png
  */
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(path.dirname(''), 'public')));
 
 app.use('/login', loginRouter);
 app.use('/', necesitaAutenticacion, indexRouter);
@@ -64,7 +64,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
