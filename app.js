@@ -1,3 +1,4 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -41,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cookieSession({
   name: 'sesion', //nombre de la cookie
-  keys: ["secret1", "secret2"],  //claves para firmar la cookie
+  keys: [process.env.COOKIE_SECRET_1, process.env.COOKIE_SECRET_2],  //claves para firmar la cookie
   maxAge: 5 * 60 * 1000 //caducidad en milisegundos
 }))
 
@@ -92,7 +93,7 @@ Tanto then como catch reciben como único parámetro una función (utilizamos en
 anónimas en línea). Esas funciones contienen esas instrucciones que queremos lanzar en diferido,
 cuando la conexión se establezca o cuando falle.
 */
-const connection = new Sequelize("mariadb://root@127.0.0.1:3306/test");
+const connection = new Sequelize(process.env.DATABASE_URL);
 connection.authenticate().then(() => {
 
   //1. Inicialización de los modelos
